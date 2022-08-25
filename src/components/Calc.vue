@@ -68,7 +68,7 @@ export default {
 }
 
 .display {
-    width: 90%;
+    width: 91%;
 
     &__wrap {
         display: flex;
