@@ -20,9 +20,9 @@
             </div>
             <div class="wrapper__checkbox">
                 <input type="checkbox" id="checkbox" v-model="checked">
-                <label for="checkbox">Отобразить экранную клавиатуру {{  showKeyboard()  }}</label>
+                <label for="checkbox">Отобразить экранную клавиатуру</label>
             </div>
-            <div class="wrapper__keyboard" v-bind:class="{ active: isActive }">
+            <div class="wrapper__keyboard" v-show="checked">
                 <div class="wrapper__numbers">
                     <button v-on:click="input(num)" class="keyboard__btn" v-for="num of numbers" :key="num"> {{  num  }}
                     </button>
@@ -54,7 +54,6 @@ export default {
         numbers: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
         picked: 'Операнд1',
         checked: false,
-        isActive: false,
         del: 'Del',
         reset: 'Reset'
     }),
@@ -68,9 +67,6 @@ export default {
             } else if (this.picked === 'Операнд2') {
                 this.operand2 = this.operand2.substring(0, this.operand2.length - 1)
             }
-        },
-        showKeyboard() {
-            this.checked === true ? this.isActive = true : this.isActive = false
         },
         resetNum() {
             this.operand1 = '';
@@ -131,7 +127,6 @@ export default {
 
 .wrapper {
     &__keyboard {
-        display: none;
         margin: 0 auto;
     }
 
@@ -216,11 +211,6 @@ export default {
         color: #414f5b;
         font-weight: bold;
     }
-}
-
-
-.active {
-    display: block;
 }
 
 .error {
