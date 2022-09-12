@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <header>
-      <div class="header">My personal costs</div>
+      <div class="header">My personal costs = {{ totalCost }}</div>
     </header>
     <main>
-      <AddPaymantForm @add-payment="addPayment"></AddPaymantForm>
-      <PaymantsDisplay :paymentsList='paymentsList'></PaymantsDisplay>
+      <AddPaymantForm @add-payment="addPayment" :categoryList="categoryList">
+      </AddPaymantForm>
+      <PaymantsDisplay :paymentsList='paymentsList'>
+      </PaymantsDisplay>
+      <PaginationList></PaginationList>
     </main>
   </div>
 </template>
@@ -14,44 +17,29 @@
 
 import PaymantsDisplay from './components/PaymantsDisplay.vue';
 import AddPaymantForm from './components/AddPaymantForm.vue';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
+import PaginationList from './components/PaginationList.vue';
 
 export default {
   name: 'App',
   components: {
     PaymantsDisplay,
-    AddPaymantForm
+    AddPaymantForm,
+    PaginationList
   },
-  data() {
-    return {
-      paymentsList: []
-    }
+  computed: {
+    ...mapGetters(['paymentsList', 'categoryList', 'totalCost'])
   },
   methods: {
-    fetchPaymentsData() {
-      return [
-        {
-          date: '28.03.2020',
-          category: 'Food',
-          value: 169
-        },
-        {
-          date: '24.03.2020',
-          category: 'Transport',
-          value: 360
-        },
-        {
-          date: '24.03.2020',
-          category: 'Food',
-          value: 532
-        },
-      ]
-    },
+    ...mapActions(['fetchData', 'fetchCategoryData']),
+    ...mapMutations(['ADD_PAYMENT_DATA']),
     addPayment(data) {
-      this.paymentsList.push(data)
+      this.ADD_PAYMENT_DATA(data)
     }
   },
   created() {
-    this.paymentsList = this.fetchPaymentsData()
+    this.fetchCategoryData();
+    this.fetchData();
   }
 }
 </script>

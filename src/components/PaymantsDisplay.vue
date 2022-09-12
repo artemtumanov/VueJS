@@ -1,24 +1,25 @@
 <template>
-    <div class="list">
-
-        <div class="list__wrapper">
-            <div class="list__number"><b>#</b></div>
-            <div class="list__date"><b>Date</b></div>
-            <div class="list__category"><b>Category</b></div>
-            <div class="list__value"><b>Value</b></div>
-        </div>
-        <hr>
-        <div v-for="(payment, index) in paymentsList" :key="index">
+    <div style="width:100%">
+        <div class="list">
             <div class="list__wrapper">
-                <div class="list__number">{{ index + 1 }}</div>
-                <div class="list__date">{{ payment.date }}</div>
-                <div class="list__category">{{ payment.category }}</div>
-                <div class="list__value">{{ payment.value }}</div>
+                <div class="list__number"><b>#</b></div>
+                <div class="list__date"><b>Date</b></div>
+                <div class="list__category"><b>Category</b></div>
+                <div class="list__value"><b>Value</b></div>
             </div>
             <hr>
+            <div v-for="(payment, index) in paymentsList" :key="index">
+                <div class="list__wrapper">
+                    <div class="list__number">{{ index + 1 }}</div>
+                    <div class="list__date">{{ payment.date }}</div>
+                    <div class="list__category">{{ payment.category }}</div>
+                    <div class="list__value">{{ payment.value }}</div>
+                </div>
+                <hr>
+            </div>
         </div>
-
     </div>
+
 </template>
 
 <script>

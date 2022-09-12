@@ -4,7 +4,11 @@
         <div class="add__inputs" v-show="isShow">
             <div class="add__inputs-wrapper">
                 <input class="add__input" placeholder="Payment date" v-model="date" />
-                <input class="add__input" placeholder="Payment description" v-model="category" />
+                <select class="add__input" v-model="category">
+                    <option v-for="category of categoryList" :key="category">
+                        {{ category }}
+                    </option>
+                </select>
                 <input class="add__input" placeholder="Payment amount" v-model="value" />
             </div>
 
@@ -23,6 +27,12 @@ export default {
             date: '',
             isShow: false
         }
+    },
+    props: {
+        categoryList: {
+            type: Array,
+            default: () => []
+        },
     },
     methods: {
         addPayment() {
@@ -50,7 +60,6 @@ export default {
             const day = currentDate.getDate();
             const month = currentDate.getMonth() + 1;
             const year = currentDate.getFullYear();
-
 
             return `${day}.${month}.${year}`
         }
