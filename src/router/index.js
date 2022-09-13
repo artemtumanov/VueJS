@@ -1,29 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import DashBoard from '../../pages/DashBoard'
+import AboutPage from '../../pages/AboutPage'
+import NotFound from '../../pages/NotFound'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
-
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+  routes: [
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashBoard
+    },
+    {
+      path: '/dashboard/:page',
+      component: DashBoard
+    },
+    {
+      path: '/aboutpage',
+      name: 'aboutpage',
+      component: AboutPage
+    },
+    {
+      path: '/notfound',
+      name: 'notfound',
+      component: NotFound
+    },
+    {
+      path: '*',
+      redirect: '/notfound'
+    }
+  ]
+})
+
+const titles = {
+  dashboard: 'Dashboard',
+  aboutpage: 'About',
+  notfound: 'Not Found'
+};
+
+router.afterEach((to) => {
+  document.title = titles[to.name]
 })
 
 export default router
