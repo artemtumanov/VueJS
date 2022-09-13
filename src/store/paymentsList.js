@@ -1,25 +1,6 @@
-const API_DATA = {
-  page1: [ 
-           { date: '21.03.2020', category: 'Food', value: 169 },
-           { date: '22.03.2020', category: 'Transport', value: 360 },
-           { date: '23.03.2020', category: 'Education', value: 500 } 
-  ],
-  page2: [
-           { date: '24.03.2020', category: 'Food', value: 233 },
-           { date: '25.03.2020', category: 'Transport', value: 242 },
-           { date: '26.03.2020', category: 'Entertainment', value: 532 }
-  ],
-  page3: [
-           { date: '27.03.2020', category: 'Food', value: 199 },
-           { date: '28.03.2020', category: 'Transport', value: 344 },
-           { date: '29.03.2020', category: 'Sport', value: 322 }
-  ]
-}
-
 export default {
     state: {
-        paymentsList: [],
-        paymentsListByPages: {}
+        paymentsList: []
       },
       getters: {
         paymentsList: (state) => state.paymentsList,
@@ -35,10 +16,33 @@ export default {
       },
       actions: {
         fetchData({ commit }) {
-          setTimeout(() => {
-            const initialPaymentsList = API_DATA.page1
-            commit('SET_PAYMENTS_LIST', initialPaymentsList)
-          }, 1000)
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve([
+                { date: '20.03.2020', category: 'Food', value: 169, id:1 },
+                { date: '21.03.2020', category: 'Navigation', value: 50, id:2 },
+                { date: '22.03.2020', category: 'Sport', value: 450, id:3 },
+                { date: '23.03.2020', category: 'Entertaiment', value: 969, id:4 },
+                { date: '24.03.2020', category: 'Education', value: 1500, id:5 },
+                { date: '25.03.2020', category: 'Food', value: 200, id:6 },
+                { date: '20.03.2020', category: 'Food', value: 169, id:7 },
+                { date: '21.03.2020', category: 'Navigation', value: 50, id:8 },
+                { date: '22.03.2020', category: 'Sport', value: 450, id:9 },
+                { date: '23.03.2020', category: 'Entertaiment', value: 969, id:10 },
+                { date: '24.03.2020', category: 'Education', value: 1500, id:11 },
+                { date: '25.03.2020', category: 'Food', value: 200, id:12 },
+                { date: '20.03.2020', category: 'Food', value: 169, id:13 },
+                { date: '21.03.2020', category: 'Navigation', value: 50, id:14 },
+                { date: '22.03.2020', category: 'Sport', value: 450, id:15 },
+                { date: '23.03.2020', category: 'Entertaiment', value: 969, id:16 },
+                { date: '24.03.2020', category: 'Education', value: 1500, id:17 },
+                { date: '25.03.2020', category: 'Food', value: 200, id:18 }
+              ]
+              )
+            }, 1000)
+          }).then(res => {
+            commit('SET_PAYMENTS_LIST', res)
+          })
         }
       }
 }

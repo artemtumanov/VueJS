@@ -8,9 +8,9 @@
                 <div class="list__value"><b>Value</b></div>
             </div>
             <hr>
-            <div v-for="(payment, index) in paymentsList" :key="index">
+            <div v-for="payment in currentElements" :key="payment.id">
                 <div class="list__wrapper">
-                    <div class="list__number">{{ index + 1 }}</div>
+                    <div class="list__number">{{ payment.id }}</div>
                     <div class="list__date">{{ payment.date }}</div>
                     <div class="list__category">{{ payment.category }}</div>
                     <div class="list__value">{{ payment.value }}</div>
@@ -18,24 +18,47 @@
                 <hr>
             </div>
         </div>
+        <PaginationList :length="paymentsList.length" :n="n" :cur="page" @paginate="onPaginate">
+        </PaginationList>
     </div>
 
 </template>
 
 <script>
+import PaginationList from './PaginationList.vue';
 export default {
+    components: { PaginationList },
+    data() {
+        return {
+            page: 1,
+            n: 5
+        }
+    },
+    methods: {
+        onPaginate(p) {
+            this.page = p
+        }
+    },
     props: {
         paymentsList: {
             type: Array,
             default: () => ([])
         }
-    }
+    },
+    computed: {
+        currentElements() {
+            const { n, page } = this
+            return this.paymentsList.slice(n * (page - 1), n * (page - 1) + n)
+        }
+    },
+
 }
 </script>
 
 <style lang="scss" scoped>
 .list {
     width: 100%;
+    height: 300px;
     display: flex;
     flex-direction: column;
 

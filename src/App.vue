@@ -1,46 +1,27 @@
 <template>
   <div id="app">
     <header>
-      <div class="header">My personal costs = {{ totalCost }}</div>
+      <nav>
+        <router-link to="dashboard" class="router-link">DashBoard</router-link>
+        <router-link to="aboutpage" class="router-link">About</router-link>
+        <router-link to="notfound" class="router-link">Not Found</router-link>
+      </nav>
     </header>
     <main>
-      <AddPaymantForm @add-payment="addPayment" :categoryList="categoryList">
-      </AddPaymantForm>
-      <PaymantsDisplay :paymentsList='paymentsList'>
-      </PaymantsDisplay>
-      <PaginationList></PaginationList>
+      <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
 
-import PaymantsDisplay from './components/PaymantsDisplay.vue';
-import AddPaymantForm from './components/AddPaymantForm.vue';
-import { mapActions, mapMutations, mapGetters } from 'vuex';
-import PaginationList from './components/PaginationList.vue';
 
 export default {
   name: 'App',
-  components: {
-    PaymantsDisplay,
-    AddPaymantForm,
-    PaginationList
-  },
-  computed: {
-    ...mapGetters(['paymentsList', 'categoryList', 'totalCost'])
-  },
-  methods: {
-    ...mapActions(['fetchData', 'fetchCategoryData']),
-    ...mapMutations(['ADD_PAYMENT_DATA']),
-    addPayment(data) {
-      this.ADD_PAYMENT_DATA(data)
-    }
-  },
-  created() {
-    this.fetchCategoryData();
-    this.fetchData();
-  }
+  // mounted() {
+  //   console.log(this.$router);
+  //   console.log(this.$route);
+  // },
 }
 </script>
 
@@ -53,6 +34,24 @@ export default {
 
 body {
   font-family: sans-serif;
+}
+
+header {
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.router-link {
+  margin: 0 50px;
+  font-size: 30px;
+  text-decoration: none;
+  color: rgba($color: #000000, $alpha: 0.5);
+
+  &:focus {
+    color: #000000
+  }
 }
 
 .header {

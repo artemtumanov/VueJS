@@ -25,6 +25,7 @@ export default {
             value: '',
             category: '',
             date: '',
+            id: '',
             isShow: false
         }
     },
@@ -33,15 +34,20 @@ export default {
             type: Array,
             default: () => []
         },
+        paymentsList: {
+            type: Array,
+            default: () => ([])
+        }
     },
     methods: {
         addPayment() {
-            const { value, category, date } = this;
+            let { value, category, date } = this;
 
-            const data = {
+            let data = {
                 value,
                 category,
-                date: date || this.currentDate
+                date: date || this.currentDate,
+                id: this.paymentsList.length + 1
             }
 
             this.$emit('add-payment', data);
