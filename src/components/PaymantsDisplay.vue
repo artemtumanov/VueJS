@@ -50,8 +50,7 @@ export default {
             const { n, page } = this
             return this.paymentsList.slice(n * (page - 1), n * (page - 1) + n)
         }
-    },
-
+    }
 }
 </script>
 

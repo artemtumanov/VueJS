@@ -58,19 +58,43 @@ export default {
             } else {
                 this.isShow = false
             }
-        }
+        },
+        acceptQuickPayment() {
+            if (this.$route.params.category) {
+                this.category = this.$route.params.category;
+                this.date = this.getCurrentDate;
+            }
+
+            if (this.$route.query.value) {
+                this.value = this.$route.query.value;
+                setTimeout(() => {
+                    this.addPayment();
+                }, 300);
+            }
+        },
     },
     computed: {
         currentDate() {
             const currentDate = new Date();
-            const day = currentDate.getDate();
-            const month = currentDate.getMonth() + 1;
+            const day = currentDate.getDate().toString().length > 1
+                ? currentDate.getDate() : '0' + currentDate.getDate().toString();
+            const month = (currentDate.getMonth() + 1).toString().length > 1
+                ? currentDate.getMonth() + 1
+                : "0" + (currentDate.getMonth() + 1).toString();
             const year = currentDate.getFullYear();
 
             return `${day}.${month}.${year}`
         }
     },
+    watch: {
+        $route() {
+            this.acceptQuickPayment();
+        },
+    },
 
+    mounted() {
+        this.acceptQuickPayment();
+    },
 }
 </script>
 

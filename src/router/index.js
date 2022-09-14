@@ -10,12 +10,20 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      redirect: { name: 'dashboard' },
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashBoard
     },
     {
       path: '/dashboard/:page',
+      component: DashBoard
+    },
+    {
+      path: '/add/payment/:category',
       component: DashBoard
     },
     {
