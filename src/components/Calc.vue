@@ -2,18 +2,18 @@
     <div>
         <div class="wrapper">
             <div class="wrapper__calc">
-                <div class="error" v-if="error"> {{  error  }} </div>
+                <div class="error" v-if="error"> {{ error }} </div>
                 <div class="display">
                     <div class="display__wrap">
-                        <input class="display__input" v-model="operand1" placeholder="0">
-                        <input class="display__input" v-model="operand2" placeholder="0">
+                        <input class="display__input" v-model="operand1" placeholder="0" name="op1">
+                        <input class="display__input" v-model="operand2" placeholder="0" name="op2">
                     </div>
-                    <div class="display__result">{{  result  }}</div>
+                    <div class="display__result">{{ result }}</div>
                 </div>
                 <div class="keyboard">
                     <button class="keyboard__btn" v-for="operation of operations" @click="calculate(operation)"
-                        :key="operation">
-                        {{  operation  }}
+                        :key="operation" :name="operation">
+                        {{ operation }}
                     </button>
                 </div>
                 <!-- <div class="logs"> {{  logs  }} </div> -->
@@ -24,10 +24,11 @@
             </div>
             <div class="wrapper__keyboard" v-show="checked">
                 <div class="wrapper__numbers">
-                    <button v-on:click="input(num)" class="keyboard__btn" v-for="num of numbers" :key="num"> {{  num  }}
+                    <button v-on:click="input(num)" class="keyboard__btn" v-for="num of numbers" :key="num" :name="num">
+                        {{ num }}
                     </button>
-                    <button @click="delOperand" class="keyboard__btn delete"> {{  del  }} </button>
-                    <button @click="resetNum" class="keyboard__btn reset"> {{  reset  }} </button>
+                    <button @click="delOperand" name="delete" class="keyboard__btn delete"> {{ del }} </button>
+                    <button @click="resetNum" class="keyboard__btn reset"> {{ reset }} </button>
                 </div>
                 <div class="wrapper__radio">
                     <input type="radio" id="op1" value="Операнд1" v-model="picked">
@@ -85,7 +86,6 @@ export default {
             }
 
             const { operand1, operand2, result } = this
-            console.log(Date.now())
             this.$set(this.logs, Date.now(), `${operand1} ${operation} ${operand2} = ${result}`)
         },
         sum() {
