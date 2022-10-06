@@ -1,5 +1,5 @@
 <template>
-    <div style="width:100%">
+    <!-- <div style="width:100%">
         <div class="list">
             <div class="list__wrapper">
                 <div class="list__number"><b>#</b></div>
@@ -20,7 +20,23 @@
         </div>
         <PaginationList :length="paymentsList.length" :n="n" :cur="page" @paginate="onPaginate">
         </PaginationList>
-    </div>
+    </div> -->
+    <v-container>
+        <v-row>
+            <v-col cols="1">#</v-col>
+            <v-col cols="4">Date</v-col>
+            <v-col cols="5">Category</v-col>
+            <v-col cols="2">Value</v-col>
+        </v-row>
+        <v-row v-for="({ value, category, date}, index) in currentElements" :key="index">
+            <v-col cols="1">{{ index + 1 }}</v-col>
+            <v-col cols="4">{{ date }}</v-col>
+            <v-col cols="5">{{ category }}</v-col>
+            <v-col cols="2">{{ value }}</v-col>
+        </v-row>
+        <PaginationList :length="paymentsList.length" :n="n" :cur="page" @paginate="onPaginate">
+        </PaginationList>
+    </v-container>
 
 </template>
 
