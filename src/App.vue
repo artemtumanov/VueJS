@@ -1,21 +1,24 @@
 <template>
-  <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <Calc />
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <v-btn to="/dashboard">DashBoard</v-btn>
+      <v-btn to="/aboutpage">About</v-btn>
+      <v-btn to="/notfound">NotFound</v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-import Calc from '@/components/Calc.vue'
+
 export default {
   name: 'App',
-  components: {
-    Calc,
-    HelloWorld
-  }
-}
-</script>
 
-<style lang="scss">
-</style>
+  data: () => ({
+    //
+  }),
+};
+</script>
